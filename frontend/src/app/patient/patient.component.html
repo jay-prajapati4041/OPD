@@ -1,0 +1,125 @@
+<h1>Patient Registration</h1> <!-- Page heading -->
+
+<!-- Success / error messages -->
+<div class="alert alert-success" *ngIf="successMsg">{{ successMsg }}</div> <!-- Success alert -->
+<div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div> <!-- Error alert -->
+
+<div class="card"> <!-- Registration form card -->
+    <h2>Register New Patient</h2> <!-- Card heading -->
+    <form (ngSubmit)="registerPatient()"> <!-- Registration form -->
+
+        <div class="form-group"> <!-- Name field group -->
+            <label>Full Name</label> <!-- Name label -->
+            <input type="text" [(ngModel)]="newPatient.name" name="name" required class="form-control"
+                placeholder="Enter patient name"> <!-- Name input -->
+        </div> <!-- End name group -->
+
+        <div class="form-group"> <!-- Gender field group -->
+            <label>Gender</label> <!-- Gender label -->
+            <select [(ngModel)]="newPatient.gender" name="gender" required class="form-control"> <!-- Gender select -->
+                <option value="">Select Gender</option> <!-- Default option -->
+                <option value="Male">Male</option> <!-- Male option -->
+                <option value="Female">Female</option> <!-- Female option -->
+                <option value="Other">Other</option> <!-- Other option -->
+            </select> <!-- End select -->
+        </div> <!-- End gender group -->
+
+        <div class="form-row"> <!-- Two-column row -->
+            <div class="form-group"> <!-- Age field group -->
+                <label>Age</label> <!-- Age label -->
+                <input type="number" [(ngModel)]="newPatient.age" name="age" min="0" max="150" required
+                    class="form-control" placeholder="Age"> <!-- Age input -->
+            </div> <!-- End age group -->
+            <div class="form-group"> <!-- Phone field group -->
+                <label>Phone Number</label> <!-- Phone label -->
+                <input type="text" [(ngModel)]="newPatient.phone" name="phone" required class="form-control"
+                    placeholder="e.g. 9876543210"> <!-- Phone input -->
+            </div> <!-- End phone group -->
+        </div> <!-- End form-row -->
+
+        <button type="submit" class="btn btn-primary" [disabled]="loading"> <!-- Submit button -->
+            {{ loading ? 'Registering...' : '+ Register Patient' }} <!-- Dynamic label -->
+        </button> <!-- End button -->
+    </form> <!-- End form -->
+</div> <!-- End card -->
+
+<div class="card"> <!-- Patient list card -->
+    <h2>Patient List</h2> <!-- Card heading -->
+
+    <div class="search-bar"> <!-- Search controls -->
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Search by name or phone"
+            class="form-control search-input"> <!-- Search input -->
+        <button (click)="search()" class="btn btn-secondary">Search</button> <!-- Search button -->
+        <button (click)="resetSearch()" class="btn btn-outline">Clear</button> <!-- Clear button -->
+    </div> <!-- End search-bar -->
+
+    <div class="empty-state" *ngIf="patients.length === 0"> <!-- Empty state -->
+        <span class="empty-state-icon">👥</span> <!-- Icon -->
+        No patients registered yet. Use the form above to add one. <!-- Message -->
+    </div> <!-- End empty state -->
+
+    <table *ngIf="patients.length > 0"> <!-- Patient table shown only if data exists -->
+        <thead> <!-- Table headers -->
+            <tr>
+                <th>ID</th> <!-- ID column -->
+                <th>Name</th> <!-- Name column -->
+                <th>Gender</th> <!-- Gender column -->
+                <th>Age</th> <!-- Age column -->
+                <th>Phone</th> <!-- Phone column -->
+                <th>Actions</th> <!-- Actions column -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let patient of patients"> <!-- Row for each patient -->
+                <td>{{ patient.id }}</td> <!-- Show ID -->
+                <td>{{ patient.name }}</td> <!-- Show name -->
+                <td>{{ patient.gender }}</td> <!-- Show gender -->
+                <td>{{ patient.age }}</td> <!-- Show age -->
+                <td>{{ patient.phone }}</td> <!-- Show phone -->
+                <td> <!-- Actions cell -->
+                    <button class="btn btn-outline btn-sm" (click)="viewHistory(patient.id!)">
+                        <!-- History toggle button -->
+                        {{ selectedPatientId === patient.id ? 'Hide History' : '📋 History' }} <!-- Dynamic label -->
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table> <!-- End table -->
+
+    <!-- Consultation history panel, shown when a patient is selected -->
+    <div *ngIf="selectedPatientId !== null" class="history-panel"> <!-- History panel -->
+        <h2>Consultation History</h2> <!-- Panel heading -->
+
+        <div class="empty-state" *ngIf="consultationHistory.length === 0"> <!-- Empty state for history -->
+            <span class="empty-state-icon">📭</span> <!-- Icon -->
+            No completed consultations found for this patient. <!-- Empty message -->
+        </div> <!-- End empty -->
+
+        <table *ngIf="consultationHistory.length > 0"> <!-- History table -->
+            <thead>
+                <tr>
+                    <th>Consult ID</th> <!-- Column header -->
+                    <th>Appt ID</th> <!-- Column header -->
+                    <th>Date &amp; Time</th> <!-- Column header -->
+                    <th>Doctor</th> <!-- Column header -->
+                    <th>Temp (°C)</th> <!-- Column header -->
+                    <th>BP</th> <!-- Column header -->
+                    <th>Notes</th> <!-- Column header -->
+                    <th>Status</th> <!-- Column header -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of consultationHistory"> <!-- Row for each consultation -->
+                    <td>{{ c.id }}</td> <!-- Consultation ID -->
+                    <td>{{ c.appointment?.id }}</td> <!-- Appointment ID from nested object -->
+                    <td>{{ c.consultationDateTime | date:'dd/MM/yyyy HH:mm' }}</td> <!-- Formatted date -->
+                    <td>{{ c.doctorName }}</td> <!-- Doctor name -->
+                    <td>{{ c.bodyTemperature }}</td> <!-- Temperature -->
+                    <td>{{ c.bloodPressure }}</td> <!-- Blood pressure -->
+                    <td class="notes-cell">{{ c.clinicalNotes }}</td> <!-- Notes -->
+                    <td><span class="badge badge-completed">{{ c.status }}</span></td> <!-- Status badge -->
+                </tr>
+            </tbody>
+        </table> <!-- End history table -->
+    </div> <!-- End history panel -->
+</div> <!-- End patient list card -->

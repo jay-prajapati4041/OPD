@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- XML declaration -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"> <!-- Schema location -->
+    <modelVersion>4.0.0</modelVersion> <!-- Model version -->
+    <parent> <!-- Parent project -->
+        <groupId>org.springframework.boot</groupId> <!-- Spring Boot Group -->
+        <artifactId>spring-boot-starter-parent</artifactId> <!-- Spring Boot Artifact -->
+        <version>3.2.5</version> <!-- Spring Boot Version -->
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent> <!-- End Parent project -->
+    <groupId>com.opd</groupId> <!-- App Group ID -->
+    <artifactId>backend</artifactId> <!-- App Artifact ID -->
+    <version>0.0.1-SNAPSHOT</version> <!-- App Version -->
+    <name>backend</name> <!-- App Name -->
+    <description>OPD Patient Registration Module</description> <!-- App Description -->
+    <properties> <!-- Properties block -->
+        <java.version>17</java.version> <!-- Java version 17 -->
+    </properties> <!-- End Properties block -->
+    <dependencies> <!-- Dependencies block -->
+        <dependency> <!-- Web dependency -->
+            <groupId>org.springframework.boot</groupId> <!-- Spring Boot Group -->
+            <artifactId>spring-boot-starter-web</artifactId> <!-- Spring Web Starter -->
+        </dependency> <!-- End Web dependency -->
+        <dependency> <!-- Data JPA dependency -->
+            <groupId>org.springframework.boot</groupId> <!-- Spring Boot Group -->
+            <artifactId>spring-boot-starter-data-jpa</artifactId> <!-- JPA Starter -->
+        </dependency> <!-- End Data JPA dependency -->
+        <dependency> <!-- MySQL driver dependency -->
+            <groupId>com.mysql</groupId> <!-- MySQL Group -->
+            <artifactId>mysql-connector-j</artifactId> <!-- MySQL Connector -->
+            <scope>runtime</scope> <!-- Runtime scoped -->
+        </dependency> <!-- End MySQL driver dependency -->
+    </dependencies> <!-- End Dependencies block -->
+    <build> <!-- Build block -->
+        <plugins> <!-- Plugins block -->
+            <plugin> <!-- Spring Boot Maven plugin -->
+                <groupId>org.springframework.boot</groupId> <!-- Spring Boot Group -->
+                <artifactId>spring-boot-maven-plugin</artifactId> <!-- Boot Maven Plugin -->
+            </plugin> <!-- End Spring Boot Maven plugin -->
+        </plugins> <!-- End Plugins block -->
+    </build> <!-- End Build block -->
+</project> <!-- End Project root tag -->
+
+
+
+
+<!--  this is the dependency file  -->

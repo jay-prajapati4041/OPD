@@ -1,0 +1,575 @@
+/* App shell styles */
+* {
+  /* All elements */
+  box-sizing: border-box;
+  /* Include padding in width calculations */
+  margin: 0;
+  /* Remove default margins */
+  padding: 0;
+  /* Remove default padding */
+}
+
+/* End * */
+
+body {
+  /* Body element */
+  font-family: 'Segoe UI', sans-serif;
+  /* Clean system font */
+  background: #f0f4f8;
+  /* Light grey-blue background */
+  color: #333;
+  /* Dark default text */
+}
+
+/* End body */
+
+.app-shell {
+  /* Main app shell wrapper */
+  min-height: 100vh;
+  /* Full viewport height */
+  display: flex;
+  /* Flexbox layout */
+  flex-direction: column;
+  /* Stack vertically */
+}
+
+/* End app-shell */
+
+.top-nav {
+  /* Navigation bar */
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  /* Blue gradient */
+  color: white;
+  /* White text */
+  padding: 0 24px;
+  /* Horizontal padding */
+  height: 60px;
+  /* Fixed height */
+  display: flex;
+  /* Flexbox */
+  align-items: center;
+  /* Center vertically */
+  justify-content: space-between;
+  /* Space between brand and links */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  /* Drop shadow */
+  position: sticky;
+  /* Stick to top */
+  top: 0;
+  /* Stick at top */
+  z-index: 100;
+  /* Above other content */
+}
+
+/* End top-nav */
+
+.nav-brand {
+  /* Brand area */
+  display: flex;
+  /* Flexbox */
+  align-items: center;
+  /* Center vertically */
+  gap: 10px;
+  /* Space between icon and title */
+}
+
+/* End nav-brand */
+
+.brand-icon {
+  /* Hospital icon */
+  font-size: 1.5rem;
+  /* Larger size */
+}
+
+/* End brand-icon */
+
+.brand-title {
+  /* App title in nav */
+  font-size: 1.2rem;
+  /* Size */
+  font-weight: 700;
+  /* Bold */
+  letter-spacing: 0.5px;
+  /* Slight letter spacing */
+}
+
+/* End brand-title */
+
+.nav-links {
+  /* Navigation links container */
+  display: flex;
+  /* Row layout */
+  gap: 6px;
+  /* Space between links */
+}
+
+/* End nav-links */
+
+.nav-links a {
+  /* Individual nav link */
+  color: rgba(255, 255, 255, 0.85);
+  /* Slightly transparent white */
+  text-decoration: none;
+  /* No underline */
+  padding: 8px 16px;
+  /* Padding */
+  border-radius: 20px;
+  /* Pill shape */
+  font-size: 0.95rem;
+  /* Slightly smaller text */
+  font-weight: 500;
+  /* Medium weight */
+  transition: all 0.2s ease;
+  /* Smooth transition */
+}
+
+/* End nav link */
+
+.nav-links a:hover {
+  /* Nav link on hover */
+  background: rgba(255, 255, 255, 0.2);
+  /* White translucent background */
+  color: white;
+  /* Full white */
+}
+
+/* End hover */
+
+.nav-links a.active {
+  /* Active route link */
+  background: rgba(255, 255, 255, 0.25);
+  /* Highlighted background */
+  color: white;
+  /* Full white */
+  font-weight: 700;
+  /* Bold active link */
+}
+
+/* End active */
+
+.main-content {
+  /* Main content area */
+  padding: 24px;
+  /* Inner padding */
+  flex: 1;
+  /* Take remaining space */
+  max-width: 1100px;
+  /* Limit width */
+  width: 100%;
+  /* Full width */
+  margin: 0 auto;
+  /* Center horizontally */
+}
+
+/* End main-content */
+
+/* Shared card styles used across all components */
+.card {
+  /* Card container */
+  background: white;
+  /* White background */
+  border-radius: 12px;
+  /* Rounded corners */
+  padding: 24px;
+  /* Inner padding */
+  margin-bottom: 24px;
+  /* Space below */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  /* Subtle shadow */
+}
+
+/* End card */
+
+.form-group {
+  /* Form group wrapper */
+  margin-bottom: 16px;
+  /* Space below */
+}
+
+/* End form-group */
+
+label {
+  /* Form labels */
+  display: block;
+  /* Block-level */
+  font-weight: 600;
+  /* Bold */
+  margin-bottom: 6px;
+  /* Space below */
+  font-size: 0.9rem;
+  /* Slightly smaller */
+  color: #555;
+  /* Grey text */
+}
+
+/* End label */
+
+.form-control {
+  /* Form inputs and selects */
+  width: 100%;
+  /* Full width */
+  padding: 10px 12px;
+  /* Inner padding */
+  border: 1.5px solid #dce1e9;
+  /* Grey border */
+  border-radius: 8px;
+  /* Rounded */
+  font-size: 1rem;
+  /* Normal size */
+  transition: border-color 0.2s;
+  /* Smooth border color transition */
+  background: #fafbfc;
+  /* Very light background */
+}
+
+/* End form-control */
+
+.form-control:focus {
+  /* Input focused state */
+  outline: none;
+  /* Remove default outline */
+  border-color: #1a73e8;
+  /* Blue border on focus */
+  background: white;
+  /* White on focus */
+}
+
+/* End focus */
+
+.btn {
+  /* Button base class */
+  padding: 10px 20px;
+  /* Padding */
+  border: none;
+  /* No border */
+  border-radius: 8px;
+  /* Rounded */
+  font-size: 0.95rem;
+  /* Font size */
+  font-weight: 600;
+  /* Bold */
+  cursor: pointer;
+  /* Pointer cursor */
+  transition: all 0.2s ease;
+  /* Smooth animation */
+  margin-right: 8px;
+  /* Space between buttons */
+}
+
+/* End btn */
+
+.btn-primary {
+  /* Primary action button */
+  background: #1a73e8;
+  /* Blue background */
+  color: white;
+  /* White text */
+}
+
+/* End btn-primary */
+
+.btn-primary:hover {
+  /* Primary hover */
+  background: #1558c0;
+  /* Darker blue */
+}
+
+/* End hover */
+
+.btn-primary:disabled {
+  /* Disabled state */
+  background: #a8c4f0;
+  /* Lighter blue */
+  cursor: not-allowed;
+  /* Not-allowed cursor */
+}
+
+/* End disabled */
+
+.btn-secondary {
+  /* Secondary button */
+  background: #6c757d;
+  /* Grey */
+  color: white;
+  /* White text */
+}
+
+/* End btn-secondary */
+
+.btn-secondary:hover {
+  /* Secondary hover */
+  background: #545b62;
+  /* Darker grey */
+}
+
+/* End hover */
+
+.btn-success {
+  /* Success green button */
+  background: #28a745;
+  /* Green */
+  color: white;
+  /* White text */
+}
+
+/* End btn-success */
+
+.btn-success:hover {
+  /* Success hover */
+  background: #1e7e34;
+  /* Darker green */
+}
+
+/* End hover */
+
+.btn-outline {
+  /* Outline button */
+  background: transparent;
+  /* Transparent */
+  border: 1.5px solid #dce1e9;
+  /* Grey border */
+  color: #555;
+  /* Grey text */
+}
+
+/* End btn-outline */
+
+.btn-outline:hover {
+  /* Outline hover */
+  background: #f0f4f8;
+  /* Light background */
+}
+
+/* End hover */
+
+/* Table shared styles */
+table {
+  /* Generic table */
+  width: 100%;
+  /* Full width */
+  border-collapse: collapse;
+  /* Remove cell spacing */
+}
+
+/* End table */
+
+th,
+td {
+  /* Table cells */
+  padding: 12px 14px;
+  /* Cell padding */
+  text-align: left;
+  /* Left align */
+  border-bottom: 1px solid #eef0f3;
+  /* Light separator */
+  font-size: 0.93rem;
+  /* Slightly smaller */
+}
+
+/* End th td */
+
+th {
+  /* Table headers */
+  background: #f5f7fa;
+  /* Light header background */
+  font-weight: 700;
+  /* Bold */
+  color: #444;
+  /* Dark grey */
+  text-transform: uppercase;
+  /* Uppercased headers */
+  font-size: 0.8rem;
+  /* Smaller size */
+  letter-spacing: 0.5px;
+  /* Letter spacing */
+}
+
+/* End th */
+
+tr:hover td {
+  /* Row hover */
+  background: #f9fafc;
+  /* Slight highlight */
+}
+
+/* End row hover */
+
+/* Status badge styles */
+.badge {
+  /* Status badge */
+  display: inline-block;
+  /* Inline block */
+  padding: 4px 10px;
+  /* Padding */
+  border-radius: 12px;
+  /* Pill shape */
+  font-size: 0.78rem;
+  /* Small text */
+  font-weight: 700;
+  /* Bold */
+  text-transform: uppercase;
+  /* Uppercase */
+  letter-spacing: 0.5px;
+  /* Spacing */
+}
+
+/* End badge */
+
+.badge-scheduled {
+  /* Scheduled status badge */
+  background: #e3f0ff;
+  /* Light blue background */
+  color: #1a73e8;
+  /* Blue text */
+}
+
+/* End badge-scheduled */
+
+.badge-completed {
+  /* Completed status badge */
+  background: #e6f9ec;
+  /* Light green background */
+  color: #1e7e34;
+  /* Green text */
+}
+
+/* End badge-completed */
+
+/* Alert messages */
+.alert {
+  /* Alert base */
+  padding: 12px 16px;
+  /* Padding */
+  border-radius: 8px;
+  /* Rounded */
+  margin-bottom: 16px;
+  /* Space below */
+  font-size: 0.93rem;
+  /* Font size */
+}
+
+/* End alert */
+
+.alert-success {
+  /* Success alert */
+  background: #e6f9ec;
+  /* Light green */
+  color: #155724;
+  /* Dark green text */
+  border: 1px solid #c3e6cb;
+  /* Green border */
+}
+
+/* End alert-success */
+
+.alert-danger {
+  /* Error alert */
+  background: #fdecea;
+  /* Light red */
+  color: #721c24;
+  /* Dark red text */
+  border: 1px solid #f5c6cb;
+  /* Red border */
+}
+
+/* End alert-danger */
+
+.empty-state {
+  /* Empty state message */
+  text-align: center;
+  /* Center text */
+  padding: 40px;
+  /* Generous padding */
+  color: #888;
+  /* Grey color */
+  font-size: 1rem;
+  /* Normal size */
+}
+
+/* End empty-state */
+
+.empty-state-icon {
+  /* Icon in empty state */
+  font-size: 3rem;
+  /* Large icon */
+  margin-bottom: 12px;
+  /* Space below */
+  display: block;
+  /* Block display */
+}
+
+/* End empty-state-icon */
+
+h1 {
+  /* Page headings */
+  font-size: 1.6rem;
+  /* Large */
+  font-weight: 700;
+  /* Bold */
+  color: #1a1f36;
+  /* Near black */
+  margin-bottom: 20px;
+  /* Space below */
+}
+
+/* End h1 */
+
+h2 {
+  /* Section headings */
+  font-size: 1.15rem;
+  /* Medium large */
+  font-weight: 700;
+  /* Bold */
+  color: #1a1f36;
+  /* Near black */
+  margin-bottom: 16px;
+  /* Space below */
+}
+
+/* End h2 */
+
+.read-only-field {
+  /* Read-only field display */
+  padding: 10px 12px;
+  /* Padding */
+  background: #f5f7fa;
+  /* Light grey */
+  border-radius: 8px;
+  /* Rounded */
+  font-size: 1rem;
+  /* Normal size */
+  color: #555;
+  /* Grey text */
+  border: 1.5px solid #eef0f3;
+  /* Light border */
+}
+
+/* End read-only-field */
+
+@media (max-width: 768px) {
+
+  /* Mobile breakpoint */
+  .main-content {
+    /* Main content on mobile */
+    padding: 16px;
+    /* Reduced padding */
+  }
+
+  /* End main-content mobile */
+  .top-nav {
+    /* Nav on mobile */
+    padding: 0 16px;
+    /* Reduced padding */
+  }
+
+  /* End top-nav mobile */
+  .brand-title {
+    /* Hide brand text on small screens */
+    display: none;
+    /* Hidden */
+  }
+
+  /* End brand-title mobile */
+}
+
+/* End media query */

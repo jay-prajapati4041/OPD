@@ -1,0 +1,88 @@
+/* PatientComponent styles */
+.search-bar {
+    /* Search controls wrapper */
+    display: flex;
+    /* Row layout */
+    gap: 8px;
+    /* Space between elements */
+    margin-bottom: 16px;
+    /* Space below */
+    flex-wrap: wrap;
+    /* Wrap on small screens */
+}
+
+/* End search-bar */
+
+.search-input {
+    /* Search text input */
+    flex: 1;
+    /* Grow to fill space */
+    min-width: 200px;
+    /* Minimum width */
+    margin-bottom: 0;
+    /* Override form-control margin */
+}
+
+/* End search-input */
+
+.btn-sm {
+    /* Small button variant */
+    padding: 6px 12px;
+    /* Smaller padding */
+    font-size: 0.82rem;
+    /* Smaller font */
+}
+
+/* End btn-sm */
+
+.form-row {
+    /* Two-column form row */
+    display: grid;
+    /* Grid layout */
+    grid-template-columns: 1fr 1fr;
+    /* Two equal columns */
+    gap: 16px;
+    /* Space between */
+}
+
+/* End form-row */
+
+.history-panel {
+    /* Consultation history sub-panel */
+    margin-top: 24px;
+    /* Space above */
+    padding-top: 24px;
+    /* Inner top padding */
+    border-top: 2px solid #f0f4f8;
+    /* Dividing line */
+}
+
+/* End history-panel */
+
+.notes-cell {
+    /* Notes table cell */
+    max-width: 200px;
+    /* Limit width */
+    overflow: hidden;
+    /* Hide overflow */
+    text-overflow: ellipsis;
+    /* Show ... for long text */
+    white-space: nowrap;
+    /* No wrapping */
+}
+
+/* End notes-cell */
+
+@media (max-width: 600px) {
+
+    /* Mobile */
+    .form-row {
+        /* Stack on mobile */
+        grid-template-columns: 1fr;
+        /* One column */
+    }
+
+    /* End form-row mobile */
+}
+
+/* End media */

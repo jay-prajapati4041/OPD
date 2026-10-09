@@ -1,0 +1,110 @@
+<div class="header-row"> <!-- Top header with back button -->
+    <button class="btn btn-outline btn-sm" (click)="goBack()">← Back to Appointments</button> <!-- Back button -->
+    <h1>Consultation Form</h1> <!-- Page heading -->
+</div> <!-- End header row -->
+
+<!-- Feedback messages -->
+<div class="alert alert-success" *ngIf="successMsg">{{ successMsg }}</div> <!-- Success alert -->
+<div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div> <!-- Error alert -->
+
+<!-- Already completed consultation view -->
+<div class="card" *ngIf="existingConsultation"> <!-- Show if consultation already submitted -->
+    <h2>✅ Consultation Completed</h2> <!-- Section heading -->
+    <p class="info-text">This appointment already has a completed consultation.</p> <!-- Info message -->
+    <div class="details-grid"> <!-- Details grid layout -->
+        <div class="detail-item"><label>Consultation ID</label>
+            <div class="read-only-field">{{ existingConsultation.id }}</div>
+        </div>
+        <div class="detail-item"><label>Doctor</label>
+            <div class="read-only-field">{{ existingConsultation.doctorName }}</div>
+        </div>
+        <div class="detail-item"><label>Date &amp; Time</label>
+            <div class="read-only-field">{{ existingConsultation.consultationDateTime | date:'dd/MM/yyyy HH:mm' }}</div>
+        </div>
+        <div class="detail-item"><label>Temperature (°C)</label>
+            <div class="read-only-field">{{ existingConsultation.bodyTemperature }}</div>
+        </div>
+        <div class="detail-item"><label>Blood Pressure</label>
+            <div class="read-only-field">{{ existingConsultation.bloodPressure }}</div>
+        </div>
+        <div class="detail-item full-width"><label>Clinical Notes</label>
+            <div class="read-only-field notes-box">{{ existingConsultation.clinicalNotes }}</div>
+        </div>
+    </div> <!-- End details grid -->
+</div> <!-- End existing consultation card -->
+
+<!-- Appointment details and form (shown only when no consultation yet) -->
+<ng-container *ngIf="!existingConsultation"> <!-- Show form only when no existing consultation -->
+
+    <div class="card" *ngIf="appointment"> <!-- Appointment info card -->
+        <h2>Appointment Details</h2> <!-- Section heading -->
+        <div class="details-grid"> <!-- Details grid -->
+            <div class="detail-item"><label>Appointment ID</label>
+                <div class="read-only-field">{{ appointment.id }}</div>
+            </div>
+            <div class="detail-item"><label>Patient Name</label>
+                <div class="read-only-field">{{ appointment.patient?.name }}</div>
+            </div>
+            <div class="detail-item"><label>Doctor</label>
+                <div class="read-only-field">{{ appointment.doctorName }}</div>
+            </div>
+            <div class="detail-item"><label>Date</label>
+                <div class="read-only-field">{{ appointment.appointmentDate }}</div>
+            </div>
+            <div class="detail-item"><label>Time</label>
+                <div class="read-only-field">{{ appointment.appointmentTime }}</div>
+            </div>
+            <div class="detail-item"><label>Status</label>
+                <span class="badge"
+                    [ngClass]="{ 'badge-scheduled': appointment.status === 'SCHEDULED', 'badge-completed': appointment.status === 'COMPLETED' }">
+                    {{ appointment.status }} <!-- Status badge -->
+                </span>
+            </div>
+        </div> <!-- End details grid -->
+    </div> <!-- End appointment card -->
+
+    <div class="card" *ngIf="appointment && appointment.status === 'SCHEDULED'"> <!-- Consultation form card -->
+        <h2>Record Consultation</h2> <!-- Section heading -->
+        <form (ngSubmit)="submitConsultation()"> <!-- Consultation form -->
+
+            <div class="form-row"> <!-- Two column row -->
+                <div class="form-group"> <!-- Temperature group -->
+                    <label>Body Temperature (°C) *</label> <!-- Label with required star -->
+                    <input type="number" step="0.1" min="35" max="42" [(ngModel)]="form.bodyTemperature"
+                        name="bodyTemperature" class="form-control" placeholder="e.g. 37.2" required>
+                    <!-- Temperature input -->
+                    <small class="hint">Normal range: 36.0 – 37.5 °C. Must be between 35 and 42.</small>
+                    <!-- Hint text -->
+                </div> <!-- End temperature group -->
+                <div class="form-group"> <!-- Blood pressure group -->
+                    <label>Blood Pressure (mmHg) *</label> <!-- Label with required star -->
+                    <input type="text" [(ngModel)]="form.bloodPressure" name="bloodPressure" class="form-control"
+                        placeholder="e.g. 120/80" required> <!-- BP input -->
+                    <small class="hint">Format: systolic/diastolic (e.g. 120/80)</small> <!-- Format hint -->
+                </div> <!-- End BP group -->
+            </div> <!-- End form-row -->
+
+            <div class="form-group"> <!-- Clinical notes group -->
+                <label>Clinical Notes *</label> <!-- Label -->
+                <textarea [(ngModel)]="form.clinicalNotes" name="clinicalNotes" class="form-control" rows="5"
+                    placeholder="Enter symptoms, observations, diagnosis, and treatment plan..." required></textarea>
+                <!-- Notes textarea -->
+            </div> <!-- End notes group -->
+
+            <div class="form-actions"> <!-- Button row -->
+                <button type="submit" class="btn btn-primary" [disabled]="loading"> <!-- Submit button -->
+                    {{ loading ? 'Submitting...' : '✅ Submit &amp; Complete Consultation' }} <!-- Dynamic label -->
+                </button>
+                <button type="button" class="btn btn-outline" (click)="goBack()">Cancel</button> <!-- Cancel button -->
+            </div> <!-- End form-actions -->
+        </form> <!-- End form -->
+    </div> <!-- End consultation form card -->
+
+    <div class="card" *ngIf="appointment && appointment.status === 'COMPLETED'"> <!-- Already completed info -->
+        <div class="empty-state"> <!-- Empty state style -->
+            <span class="empty-state-icon">✅</span> <!-- Icon -->
+            This appointment has been marked as COMPLETED. <!-- Message -->
+        </div>
+    </div> <!-- End completed card -->
+
+</ng-container> <!-- End ng-container -->

@@ -1,0 +1,20 @@
+<div class="app-shell"> <!-- App shell wrapper -->
+  <nav class="top-nav"> <!-- Top navigation bar -->
+    <div class="nav-brand"> <!-- Brand/logo area -->
+      <span class="brand-icon">🏥</span> <!-- Hospital icon -->
+      <span class="brand-title">OPD Management System</span> <!-- App title -->
+    </div> <!-- End brand -->
+    <div class="nav-links"> <!-- Navigation links -->
+      <a routerLink="/patients" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        👤 Patients <!-- Patient nav link -->
+      </a>
+      <a routerLink="/appointments" routerLinkActive="active">
+        📅 Appointments <!-- Appointment nav link -->
+      </a>
+    </div> <!-- End nav links -->
+  </nav> <!-- End top nav -->
+
+  <main class="main-content"> <!-- Main content area -->
+    <router-outlet></router-outlet> <!-- Router renders active component here -->
+  </main> <!-- End main -->
+</div> <!-- End app shell -->

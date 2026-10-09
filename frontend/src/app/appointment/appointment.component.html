@@ -1,0 +1,98 @@
+<h1>Appointment Booking</h1> <!-- Page heading -->
+
+<!-- Feedback messages -->
+<div class="alert alert-success" *ngIf="successMsg">{{ successMsg }}</div> <!-- Success alert -->
+<div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div> <!-- Error alert -->
+
+<div class="card"> <!-- Booking form card -->
+    <h2>Book an Appointment</h2> <!-- Card heading -->
+    <form (ngSubmit)="bookAppointment()"> <!-- Booking form -->
+
+        <div class="form-group"> <!-- Patient selection group -->
+            <label>Select Patient</label> <!-- Label -->
+            <select [(ngModel)]="form.patientId" name="patientId" class="form-control" required>
+                <!-- Patient dropdown -->
+                <option value="">-- Select Patient --</option> <!-- Default placeholder -->
+                <option *ngFor="let p of patients" [value]="p.id"> <!-- Option for each patient -->
+                    {{ p.name }} ({{ p.phone }}) <!-- Show name and phone -->
+                </option>
+            </select> <!-- End select -->
+        </div> <!-- End patient group -->
+
+        <div class="form-group"> <!-- Doctor name group -->
+            <label>Doctor Name</label> <!-- Label -->
+            <input type="text" [(ngModel)]="form.doctorName" name="doctorName" class="form-control"
+                placeholder="Enter doctor name" required> <!-- Doctor input -->
+        </div> <!-- End doctor group -->
+
+        <div class="form-row"> <!-- Two-column row -->
+            <div class="form-group"> <!-- Date group -->
+                <label>Appointment Date</label> <!-- Label -->
+                <input type="date" [(ngModel)]="form.appointmentDate" name="appointmentDate" class="form-control"
+                    [min]="todayString" required> <!-- Date input with min validation -->
+            </div> <!-- End date group -->
+            <div class="form-group"> <!-- Time group -->
+                <label>Appointment Time</label> <!-- Label -->
+                <input type="time" [(ngModel)]="form.appointmentTime" name="appointmentTime" class="form-control"
+                    required> <!-- Time picker input -->
+            </div> <!-- End time group -->
+        </div> <!-- End form-row -->
+
+        <button type="submit" class="btn btn-primary" [disabled]="loading"> <!-- Submit button -->
+            {{ loading ? 'Booking...' : '📅 Book Appointment' }} <!-- Dynamic label -->
+        </button> <!-- End button -->
+    </form> <!-- End form -->
+</div> <!-- End booking card -->
+
+<div class="card"> <!-- Today's appointments card -->
+    <div class="card-header-row"> <!-- Card header with refresh -->
+        <h2>Today's Appointments</h2> <!-- Card heading -->
+        <button class="btn btn-outline btn-sm" (click)="loadTodaysAppointments()">↻ Refresh</button>
+        <!-- Refresh button -->
+    </div> <!-- End header row -->
+
+    <div *ngIf="loadingAppointments" class="empty-state">Loading appointments...</div> <!-- Loading indicator -->
+
+    <div class="empty-state" *ngIf="!loadingAppointments && todayAppointments.length === 0"> <!-- Empty state -->
+        <span class="empty-state-icon">📭</span> <!-- Icon -->
+        No appointments scheduled for today. <!-- Empty message -->
+    </div> <!-- End empty -->
+
+    <table *ngIf="!loadingAppointments && todayAppointments.length > 0"> <!-- Appointments table -->
+        <thead>
+            <tr>
+                <th>ID</th> <!-- Column header -->
+                <th>Patient</th> <!-- Column header -->
+                <th>Phone</th> <!-- Column header -->
+                <th>Doctor</th> <!-- Column header -->
+                <th>Date</th> <!-- Column header -->
+                <th>Time</th> <!-- Column header -->
+                <th>Status</th> <!-- Column header -->
+                <th>Action</th> <!-- Column header -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let appt of todayAppointments"> <!-- Row per appointment -->
+                <td>{{ appt.id }}</td> <!-- ID -->
+                <td>{{ appt.patient?.name }}</td> <!-- Patient name from nested object -->
+                <td>{{ appt.patient?.phone }}</td> <!-- Patient phone from nested object -->
+                <td>{{ appt.doctorName }}</td> <!-- Doctor name -->
+                <td>{{ appt.appointmentDate }}</td> <!-- Date -->
+                <td>{{ appt.appointmentTime }}</td> <!-- Time -->
+                <td> <!-- Status cell -->
+                    <span class="badge"
+                        [ngClass]="{ 'badge-scheduled': appt.status === 'SCHEDULED', 'badge-completed': appt.status === 'COMPLETED' }">
+                        {{ appt.status }} <!-- Status text -->
+                    </span> <!-- End badge -->
+                </td>
+                <td> <!-- Action cell -->
+                    <button class="btn btn-success btn-sm" *ngIf="isScheduled(appt)" (click)="startConsultation(appt)">
+                        <!-- Consultation button shown only for SCHEDULED -->
+                        🩺 Consult <!-- Button label -->
+                    </button>
+                    <span *ngIf="!isScheduled(appt)" class="completed-label">✔ Done</span> <!-- Completed label -->
+                </td>
+            </tr>
+        </tbody>
+    </table> <!-- End appointments table -->
+</div> <!-- End today's card -->

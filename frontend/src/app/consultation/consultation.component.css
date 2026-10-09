@@ -1,0 +1,154 @@
+/* ConsultationComponent styles */
+.header-row {
+    /* Page title row with back button */
+    display: flex;
+    /* Flexbox */
+    align-items: center;
+    /* Vertical center */
+    gap: 16px;
+    /* Space between elements */
+    margin-bottom: 20px;
+    /* Space below */
+}
+
+/* End header-row */
+
+.header-row h1 {
+    /* Title in header row */
+    margin-bottom: 0;
+    /* Remove bottom margin */
+}
+
+/* End h1 in header */
+
+.details-grid {
+    /* Grid for read-only appointment info */
+    display: grid;
+    /* Grid layout */
+    grid-template-columns: 1fr 1fr;
+    /* Two equal columns */
+    gap: 16px;
+    /* Space between items */
+}
+
+/* End details-grid */
+
+.detail-item {
+    /* Individual detail field */
+    display: flex;
+    /* Flexbox column */
+    flex-direction: column;
+    /* Stack label and value */
+    gap: 4px;
+    /* Small gap */
+}
+
+/* End detail-item */
+
+.full-width {
+    /* Full-width detail item */
+    grid-column: 1 / -1;
+    /* Span all columns */
+}
+
+/* End full-width */
+
+.form-row {
+    /* Two-column form row */
+    display: grid;
+    /* Grid layout */
+    grid-template-columns: 1fr 1fr;
+    /* Equal columns */
+    gap: 16px;
+    /* Space */
+}
+
+/* End form-row */
+
+.hint {
+    /* Hint text below input */
+    display: block;
+    /* Block */
+    font-size: 0.78rem;
+    /* Small font */
+    color: #888;
+    /* Grey color */
+    margin-top: 4px;
+    /* Small space above */
+}
+
+/* End hint */
+
+.info-text {
+    /* Informational paragraph */
+    color: #555;
+    /* Grey */
+    margin-bottom: 16px;
+    /* Space below */
+}
+
+/* End info-text */
+
+.notes-box {
+    /* Clinical notes display box */
+    white-space: pre-wrap;
+    /* Preserve line breaks */
+    min-height: 80px;
+    /* Minimum height */
+}
+
+/* End notes-box */
+
+.form-actions {
+    /* Button group row */
+    display: flex;
+    /* Flexbox */
+    gap: 12px;
+    /* Space between buttons */
+    margin-top: 8px;
+    /* Top margin */
+    flex-wrap: wrap;
+    /* Wrap on mobile */
+}
+
+/* End form-actions */
+
+.btn-sm {
+    /* Small button */
+    padding: 6px 12px;
+    /* Smaller padding */
+    font-size: 0.82rem;
+    /* Smaller font */
+}
+
+/* End btn-sm */
+
+@media (max-width: 600px) {
+
+    /* Mobile */
+    .details-grid {
+        /* Stack on mobile */
+        grid-template-columns: 1fr;
+        /* One column */
+    }
+
+    /* End details-grid mobile */
+    .form-row {
+        /* Stack on mobile */
+        grid-template-columns: 1fr;
+        /* One column */
+    }
+
+    /* End form-row mobile */
+    .header-row {
+        /* Stack on mobile */
+        flex-direction: column;
+        /* Column */
+        align-items: flex-start;
+        /* Left align */
+    }
+
+    /* End header-row mobile */
+}
+
+/* End media */
